@@ -1,21 +1,22 @@
 package com.example.mySurferApplication.DemoApplication;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Surfer {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column
     private String name;
     @Column
     private String country;
 
-    @ManyToOne
-    @JoinColumn(name="contest_id", nullable = true)
-    private Contest contest;
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getCountry() {
         return country;

@@ -1,53 +1,64 @@
 package com.example.mySurferApplication.DemoApplication;
 
+import com.example.mySurferApplication.DemoApplication.Repositories.ContestRepository;
+import com.example.mySurferApplication.DemoApplication.Repositories.SurferRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ContestService {
 
-    @PersistenceContext
-    EntityManager entityManager;
+    @Autowired
+    private SurferRepository surferRepository;
+    @Autowired
+    private ContestRepository contestRepository;
 
-    @Transactional
     public Contest createContest(String place, Integer nrOfSurfer) {
         Contest contest = new Contest(place, nrOfSurfer);
-        entityManager.persist(contest);
+        //entityManager.persist(contest);
+        contestRepository.save(contest);
         return contest;
     }
 
-    @Transactional
     public Surfer createSurfer (Surfer surfer) {
-        entityManager.persist(surfer);
+        //entityManager.persist(surfer);
+        surferRepository.save(surfer);
         return surfer;
     }
-    @Transactional
-    public Surfer getSurfers(Long id) {
-        return entityManager.find(Surfer.class, id);
-    }
 
-    @Transactional
+
+
     public Contest registerSurferAtContest(Long surferId, Long contestId) {
-        Surfer surfer = entityManager.find(Surfer.class, surferId);
-        if (surfer == null) {
-            throw new RuntimeException("Failed to find surfer for id " + surferId);
-        }
-        Contest contest = entityManager.find(Contest.class, contestId);
-        List<Surfer> surfers = contest.registerSurfer(surfer);
-        for(Surfer s : surfers) {
-            System.out.println(s.toString());
-        }
-        entityManager.persist(contest);
+        Surfer surfer = surferRepository.findById(surferId).orElseThrow();
+        //Surfer surfer = surferRepository.findById(surferId).orElseThrow(new IllegalArgumentException());
+
+        Contest contest = contestRepository.findById(contestId).orElseThrow();
+
+        //register
+        contest.registerSurfer(surfer);
+        contestRepository.save(contest);
+
         return contest;
     }
 
-    @Transactional
+    public Surfer getSurfers(Long id) {
+        Optional<Surfer> optSurfer = surferRepository.findById(id);
+        if(optSurfer.isPresent()){
+            return optSurfer.get();
+        } else {
+            throw new RuntimeException("Failed to find surfer for id " + id );
+        }
+        //return entityManager.find(Surfer.class, id);
+    }
+
     public Contest getContest(Long id) {
-        return entityManager.find(Contest.class, id);
+        return contestRepository.findById(id).orElseThrow();
     }
 
 

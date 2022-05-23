@@ -2,39 +2,39 @@ package com.example.mySurferApplication.DemoApplication;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
+
 public class Contest {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column
     private String place;
     @Column
     private Integer maxNrOfSurfer;
-    @Column
-    private Integer currentNrOfSurfers;
 
-    @OneToMany(mappedBy = "contest")
-    private List<Surfer> registeredSurfers;
+    @OneToMany()
+    private Set<Surfer> registeredSurfers;
+
     public Contest(String place, Integer nrOfSurfer) {
         this.place = place;
         this.maxNrOfSurfer = nrOfSurfer;
-        this.registeredSurfers = new ArrayList<>();
-        this.currentNrOfSurfers = 0;
+        this.registeredSurfers = new HashSet<>();
     }
 
     public Contest(){};
 
-    public List<Surfer> registerSurfer(Surfer surfer) {
-        if (currentNrOfSurfers == maxNrOfSurfer) {
+    public Set<Surfer> registerSurfer(Surfer surfer) {
+        if (registeredSurfers.size() == maxNrOfSurfer) {
             throw new RuntimeException("Max nr of surfer exceeded");
         }
         registeredSurfers.add(surfer);
-        currentNrOfSurfers++;
         return registeredSurfers;
     }
 
@@ -54,15 +54,19 @@ public class Contest {
         this.maxNrOfSurfer = maxNrOfSurfer;
     }
 
-    public List<Surfer> getRegisteredSurfers() {
-        return registeredSurfers;
-    }
-
     public Long getId() {
         return id;
     }
 
-    public Integer getCurrentNrOfSurfers() {
-        return currentNrOfSurfers;
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Set<Surfer> getRegisteredSurfers() {
+        return registeredSurfers;
+    }
+
+    public void setRegisteredSurfers(Set<Surfer> registeredSurfers) {
+        this.registeredSurfers = registeredSurfers;
     }
 }
