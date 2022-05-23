@@ -1,9 +1,11 @@
-package com.example.mySurferApplication.DemoApplication;
+package com.example.mySurferApplication.DemoApplication.Controllers;
 
+import com.example.mySurferApplication.DemoApplication.Services.Entities.Contest;
+import com.example.mySurferApplication.DemoApplication.Services.ContestService;
+import com.example.mySurferApplication.DemoApplication.Services.Entities.Surfer;
+import com.example.mySurferApplication.DemoApplication.Services.SurferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 
 /*
@@ -21,6 +23,9 @@ public class SurfController {
 
     @Autowired
     private ContestService contestService;
+
+    @Autowired
+    private SurferService surferService;
 //
 //    public SurfController (ContestService contestService) {
 //        this.contestService = contestService;
@@ -38,12 +43,12 @@ public class SurfController {
 
     @PostMapping(value = "/surfer")
     public Surfer createSurfer (@RequestBody Surfer surfer){
-        return contestService.createSurfer(surfer);
+        return surferService.createSurfer(surfer);
     }
 
     @GetMapping(value = "/{id}/surfer")
     public Surfer getSurfers(@PathVariable(value="id") Long id){
-        return contestService.getSurfers(id);
+        return surferService.getSurfers(id);
     }
 
     @PostMapping(value = "/{surferId}/{contestId}/register")

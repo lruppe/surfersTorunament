@@ -1,7 +1,7 @@
 package com.example.mySurferApplication;
 
-import com.example.mySurferApplication.DemoApplication.Contest;
-import com.example.mySurferApplication.DemoApplication.Surfer;
+import com.example.mySurferApplication.DemoApplication.Services.Entities.Contest;
+import com.example.mySurferApplication.DemoApplication.Services.Entities.Surfer;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 

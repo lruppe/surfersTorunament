@@ -1,14 +1,12 @@
-package com.example.mySurferApplication.DemoApplication;
+package com.example.mySurferApplication.DemoApplication.Services;
 
 import com.example.mySurferApplication.DemoApplication.Repositories.ContestRepository;
 import com.example.mySurferApplication.DemoApplication.Repositories.SurferRepository;
+import com.example.mySurferApplication.DemoApplication.Services.Entities.Contest;
+import com.example.mySurferApplication.DemoApplication.Services.Entities.Surfer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -26,13 +24,9 @@ public class ContestService {
         return contest;
     }
 
-    public Surfer createSurfer (Surfer surfer) {
-        //entityManager.persist(surfer);
-        surferRepository.save(surfer);
-        return surfer;
+    public Contest getContest(Long id) {
+        return contestRepository.findById(id).orElseThrow();
     }
-
-
 
     public Contest registerSurferAtContest(Long surferId, Long contestId) {
         Surfer surfer = surferRepository.findById(surferId).orElseThrow();
@@ -45,20 +39,6 @@ public class ContestService {
         contestRepository.save(contest);
 
         return contest;
-    }
-
-    public Surfer getSurfers(Long id) {
-        Optional<Surfer> optSurfer = surferRepository.findById(id);
-        if(optSurfer.isPresent()){
-            return optSurfer.get();
-        } else {
-            throw new RuntimeException("Failed to find surfer for id " + id );
-        }
-        //return entityManager.find(Surfer.class, id);
-    }
-
-    public Contest getContest(Long id) {
-        return contestRepository.findById(id).orElseThrow();
     }
 
 

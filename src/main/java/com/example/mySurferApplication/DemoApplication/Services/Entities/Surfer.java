@@ -1,4 +1,4 @@
-package com.example.mySurferApplication.DemoApplication;
+package com.example.mySurferApplication.DemoApplication.Services.Entities;
 
 import javax.persistence.*;
 import java.util.Set;
