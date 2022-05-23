@@ -4,12 +4,14 @@ import com.example.mySurferApplication.DemoApplication.Services.Entities.Contest
 import com.example.mySurferApplication.DemoApplication.Services.Entities.Surfer;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.stereotype.Service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.failBecauseExceptionWasNotThrown;
 
+
 @SpringBootTest
-class MySurferApplicationTests {
+class UnitTest {
 
 	@Test()
 	void checkForMaxSurfersInContest()  {
@@ -21,6 +23,7 @@ class MySurferApplicationTests {
 
 		contest.registerSurfer(surfer1);
 		contest.registerSurfer(surfer2);
+		//		System.out.println(surfer1.getId());
 
 		try {
 			//when
