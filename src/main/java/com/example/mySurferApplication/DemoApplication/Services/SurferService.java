@@ -14,9 +14,7 @@ import java.util.Optional;
 public class SurferService {
     @Autowired
     private SurferRepository surferRepository;
-
     private SurferMapper surferMapper = Mappers.getMapper(SurferMapper.class);
-
 
     public SurferDto createSurfer (SurferDto surferDto) {
         //entityManager.persist(surfer);

@@ -48,14 +48,12 @@ class UnitTest {
 		Surfer surfer = createSurfer();
 		contest.registerSurfer(surfer);
 
-
 		ContestDto contestDto = contestMapper.contestToDto(contest);
 
 		assertEquals(contest.getPlace(), contestDto.getPlace());
 		assertEquals(contest.getMaxNrOfSurfer(), contestDto.getMaxParticipants());
 		assertInstanceOf(SurferDto.class,contestDto.getRegisteredSurfers().stream().findFirst().get());
 		assertEquals(contestDto.getRegisteredSurfers().stream().findFirst().get().getName(), "Leon");
-
 	}
 
 	private Contest createContest () {
