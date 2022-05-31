@@ -18,8 +18,9 @@ public class SurferService {
 
     public SurferDto createSurfer (SurferDto surferDto) {
         //entityManager.persist(surfer);
-        surferRepository.save(surferMapper.dtoToSurfer(surferDto));
-        return surferDto;
+        Surfer surfer = surferMapper.dtoToSurfer(surferDto);
+        surferRepository.save(surfer);
+        return surferMapper.surferToDto(surfer);
     }
 
     public SurferDto getSurfers(Long id) {
