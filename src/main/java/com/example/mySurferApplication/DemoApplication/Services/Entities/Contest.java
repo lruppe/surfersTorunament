@@ -28,9 +28,6 @@ public class Contest {
     public Contest(){};
 
     public Set<Surfer> registerSurfer(Surfer surfer) {
-        if (registeredSurfers.size() == maxNrOfSurfer) {
-            throw new RuntimeException("Max nr of surfer exceeded");
-        }
         registeredSurfers.add(surfer);
         return registeredSurfers;
     }

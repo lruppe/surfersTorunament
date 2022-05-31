@@ -30,9 +30,12 @@ public class ContestService {
 
     public Contest registerSurferAtContest(Long surferId, Long contestId) {
         Surfer surfer = surferRepository.findById(surferId).orElseThrow();
+        Contest contest = contestRepository.findById(contestId).orElseThrow();
         //Surfer surfer = surferRepository.findById(surferId).orElseThrow(new IllegalArgumentException());
 
-        Contest contest = contestRepository.findById(contestId).orElseThrow();
+        if (contest.getRegisteredSurfers().size() == contest.getMaxNrOfSurfer()) {
+            throw new RuntimeException("Max nr of surfer exceeded");
+        }
 
         //register
         contest.registerSurfer(surfer);

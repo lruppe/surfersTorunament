@@ -3,6 +3,7 @@ package com.example.mySurferApplication.DemoApplication.Controllers;
 import com.example.mySurferApplication.DemoApplication.Services.Entities.Contest;
 import com.example.mySurferApplication.DemoApplication.Services.ContestService;
 import com.example.mySurferApplication.DemoApplication.Services.Entities.Surfer;
+import com.example.mySurferApplication.DemoApplication.Services.Entities.SurferDto;
 import com.example.mySurferApplication.DemoApplication.Services.SurferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -42,12 +43,12 @@ public class SurfController {
     }
 
     @PostMapping(value = "/surfer")
-    public Surfer createSurfer (@RequestBody Surfer surfer){
-        return surferService.createSurfer(surfer);
+    public SurferDto createSurfer (@RequestBody SurferDto surferDto){
+        return surferService.createSurfer(surferDto);
     }
 
     @GetMapping(value = "/{id}/surfer")
-    public Surfer getSurfers(@PathVariable(value="id") Long id){
+    public SurferDto getSurfers(@PathVariable(value="id") Long id){
         return surferService.getSurfers(id);
     }
 

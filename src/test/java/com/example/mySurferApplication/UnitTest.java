@@ -1,45 +1,82 @@
 package com.example.mySurferApplication;
 
+import com.example.mySurferApplication.DemoApplication.Mappers.ContestMapper;
+import com.example.mySurferApplication.DemoApplication.Mappers.SurferMapper;
+import com.example.mySurferApplication.DemoApplication.Services.ContestService;
 import com.example.mySurferApplication.DemoApplication.Services.Entities.Contest;
+import com.example.mySurferApplication.DemoApplication.Services.Entities.ContestDto;
 import com.example.mySurferApplication.DemoApplication.Services.Entities.Surfer;
+import com.example.mySurferApplication.DemoApplication.Services.Entities.SurferDto;
 import org.junit.jupiter.api.Test;
+import org.mapstruct.factory.Mappers;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.Table;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.failBecauseExceptionWasNotThrown;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
 
-@SpringBootTest
 class UnitTest {
+	private SurferMapper surferMapper = Mappers.getMapper(SurferMapper.class);
+	private ContestMapper contestMapper = Mappers.getMapper(ContestMapper.class);
 
 	@Test()
-	void checkForMaxSurfersInContest()  {
-		//given
-		Surfer surfer1 = createSurfer("max", "italian");
-		Surfer surfer2 = createSurfer("hans", "swiss");
-		Surfer surfer3 = createSurfer("blubb", "blaaa");
-		Contest contest = new Contest("lucerne", 2);
+	void givenSurferDto_whenMaps_thenCorrect() {
+		SurferDto surferDto = createSurferDto();
 
-		contest.registerSurfer(surfer1);
-		contest.registerSurfer(surfer2);
-		//		System.out.println(surfer1.getId());
+		Surfer surfer = surferMapper.dtoToSurfer(surferDto);
+		assertEquals(surfer.getCountry(), surferDto.getCountry());
+		assertEquals(surfer.getName(), surferDto.getName());
+		assertEquals(surfer.getId(), surferDto.getId());
+	}
+	@Test
+	void givenSurfer_whenMaps_thenCorrect() {
+		Surfer surfer = createSurfer();
 
-		try {
-			//when
-			contest.registerSurfer(surfer3);
-			failBecauseExceptionWasNotThrown(RuntimeException.class);
-		} catch (Exception e){
-			//then
-			assertThat(e.getMessage()).isEqualTo("Max nr of surfer exceeded");
-		}
+		SurferDto surferDto = surferMapper.surferToDto(surfer);
+		assertEquals(surfer.getCountry(), surferDto.getCountry());
+		assertEquals(surfer.getName(), surferDto.getName());
+		assertEquals(surfer.getId(), surferDto.getId());
+	}
+	@Test
+	void givenContest_whenMaps_thenCorrect() {
+		Contest contest = createContest();
+		Surfer surfer = createSurfer();
+		contest.registerSurfer(surfer);
+
+
+		ContestDto contestDto = contestMapper.contestToDto(contest);
+
+		assertEquals(contest.getPlace(), contestDto.getPlace());
+		assertEquals(contest.getMaxNrOfSurfer(), contestDto.getMaxParticipants());
+		assertInstanceOf(SurferDto.class,contestDto.getRegisteredSurfers().stream().findFirst().get());
+		assertEquals(contestDto.getRegisteredSurfers().stream().findFirst().get().getName(), "Leon");
 
 	}
 
-	private Surfer createSurfer (String name, String nationality) {
+	private Contest createContest () {
+		Contest contest = new Contest("Luzern", 5);
+
+		return contest;
+	}
+
+	private Surfer createSurfer () {
 		Surfer surfer = new Surfer();
-		surfer.setName(name);
-		surfer.setCountry(nationality);
+		surfer.setName("Leon");
+		surfer.setCountry("Switzerland");
+		surfer.setId(1L);
 		return surfer;
+	}
+
+	private SurferDto createSurferDto (){
+		SurferDto surferDto = new SurferDto();
+		surferDto.setId(1L);
+		surferDto.setCountry("Switzerland");
+		surferDto.setName("Leon");
+		return surferDto;
 	}
 }
