@@ -5,7 +5,6 @@ import java.util.Set;
 
 @Entity
 public class Surfer {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -13,6 +12,15 @@ public class Surfer {
     private String name;
     @Column
     private String country;
+    @Column
+    private String gender;
+
+    public boolean isMale(){
+        if (gender.equals("m")){
+            return true;
+        }
+        return false;
+    }
 
     public void setId(Long id) {
         this.id = id;
@@ -37,4 +45,12 @@ public class Surfer {
     public Long getId() {
         return id;
     }
+
+    public String getGender() {
+        return gender;
+    }
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
 }
+

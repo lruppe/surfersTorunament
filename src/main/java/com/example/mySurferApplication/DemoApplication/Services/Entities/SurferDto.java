@@ -9,7 +9,7 @@ public class SurferDto {
     private Long id;
     private String name;
     private String country;
-
+    private String gender;
 
     public Long getId() {
         return id;
@@ -35,5 +35,11 @@ public class SurferDto {
         this.country = country;
     }
 
+    public String getGender() {
+        return gender;
+    }
 
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
 }

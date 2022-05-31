@@ -8,7 +8,9 @@ import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class SurferService {
@@ -33,4 +35,11 @@ public class SurferService {
         //return entityManager.find(Surfer.class, id);
     }
 
+    public List<SurferDto> getMaleSurfers() {
+        return surferRepository.findAll()
+                .stream()
+                .filter(Surfer::isMale)
+                .map(surfer -> surferMapper.surferToDto(surfer))
+                .collect(Collectors.toList());
+    }
 }

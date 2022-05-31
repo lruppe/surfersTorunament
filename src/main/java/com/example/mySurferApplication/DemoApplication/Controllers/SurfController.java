@@ -8,14 +8,17 @@ import com.example.mySurferApplication.DemoApplication.Services.SurferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 /*
- curl -XPOST "localhost:8080/surfer" -H "Content-Type: application/json" -d "{\"name\" : \"leon\", \"country\" : \"swiss\"}"
- curl -XPOST "localhost:8080/surfer" -H "Content-Type: application/json" -d "{\"name\" : \"michele\", \"country\" : \"italian\"}"
+ curl -XPOST "localhost:8080/surfer" -H "Content-Type: application/json" -d "{\"name\" : \"leon\", \"country\" : \"swiss\", \"gender\" : \"f\"}"
+ curl -XPOST "localhost:8080/surfer" -H "Content-Type: application/json" -d "{\"name\" : \"michele\", \"country\" : \"italian\", \"gender\" : \"m\"}"
  curl -XPOST "localhost:8080/contest?place=lucerne&nrOfSurfer=5"
  curl -XPOST "localhost:8080/1/3/register"
  curl -XGET "localhost:8080/3/contest"
  curl -XGET "localhost:8080/1/surfer"
+ curl -XGET "localhost:8080/maleSurfers"
 */
 
 
@@ -50,6 +53,10 @@ public class SurfController {
     @GetMapping(value = "/{id}/surfer")
     public SurferDto getSurfers(@PathVariable(value="id") Long id){
         return surferService.getSurfers(id);
+    }
+    @GetMapping(value = "/maleSurfers")
+    public List<SurferDto> getMaleSurfers(){
+        return surferService.getMaleSurfers();
     }
 
     @PostMapping(value = "/{surferId}/{contestId}/register")

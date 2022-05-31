@@ -30,6 +30,7 @@ class UnitTest {
 
 		Surfer surfer = surferMapper.dtoToSurfer(surferDto);
 		assertEquals(surfer.getCountry(), surferDto.getCountry());
+		assertEquals(surfer.getGender(), surferDto.getGender());
 		assertEquals(surfer.getName(), surferDto.getName());
 		assertEquals(surfer.getId(), surferDto.getId());
 	}
@@ -67,6 +68,7 @@ class UnitTest {
 		surfer.setName("Leon");
 		surfer.setCountry("Switzerland");
 		surfer.setId(1L);
+		surfer.setGender("m");
 		return surfer;
 	}
 
