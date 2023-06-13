@@ -5,10 +5,10 @@ To run:
     - docker build -t surferdocker:1 .
     - docker run -d --name surferdocker -p 8080:8080 surferdocker:1 
 # Start MariaDb container
-    - docker run --detach --name some-mariadb -p 3306:3306 --env MARIADB_USER=example-user --env MARIADB_PASSWORD=my_cool_secret --env MARIADB_ROOT_PASSWORD=my-secret-pw  mariadb:latest
+    - docker run --detach --name some-mariadb -p 3306:3306 --env MARIADB_USER=test --env MARIADB_PASSWORD=test --env MARIADB_ROOT_PASSWORD=my-secret-pw  mariadb:latest
     - docker exec -it some-mariadb bash
     - mysql -u root -p
-    - GRANT ALL PRIVILEGES ON *.* TO 'example-user'@'%' IDENTIFIED BY 'my_cool_secret';
+    - GRANT ALL PRIVILEGES ON *.* TO 'test'@'%' IDENTIFIED BY 'test';
 # Some API Calls
     - curl -XPOST "localhost:8080/surfer" -H "Content-Type: application/json" -d "{\"name\" : \"leon\", \"country\" : \"swiss\", \"gender\" : \"f\"}"
     - curl -XPOST "localhost:8080/surfer" -H "Content-Type: application/json" -d "{\"name\" : \"michele\", \"country\" : \"italian\", \"gender\" : \"m\"}"
