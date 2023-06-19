@@ -5,8 +5,8 @@ To run:
     - docker build -t surferdocker:1 .
     - docker run -d --name surferdocker -p 8080:8080 surferdocker:1 
 # Start MariaDb container
-    - docker run --detach --name some-mariadb -p 3306:3306 --env MARIADB_USER=test --env MARIADB_PASSWORD=test --env MARIADB_ROOT_PASSWORD=my-secret-pw  mariadb:latest
-    - docker exec -it some-mariadb bash
+    - docker run --detach --name mariaDbSurfer -p 3306:3306 --env MARIADB_USER=test --env MARIADB_PASSWORD=test --env MARIADB_ROOT_PASSWORD=root  mariadb:latest   
+    - docker exec -it mariaDbSurfer bash
     - mysql -u root -p
     - GRANT ALL PRIVILEGES ON *.* TO 'test'@'%' IDENTIFIED BY 'test';
 # Some API Calls
