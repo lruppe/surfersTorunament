@@ -1,4 +1,4 @@
-package com.example.mySurferApplication;
+package com.example.mySurferApplication.DemoApplication.Services;
 
 import com.example.mySurferApplication.DemoApplication.Mappers.ContestMapper;
 import com.example.mySurferApplication.DemoApplication.Mappers.SurferMapper;
