@@ -2,25 +2,17 @@ package com.example.mySurferApplication;
 
 import com.example.mySurferApplication.DemoApplication.Mappers.ContestMapper;
 import com.example.mySurferApplication.DemoApplication.Mappers.SurferMapper;
-import com.example.mySurferApplication.DemoApplication.Services.ContestService;
 import com.example.mySurferApplication.DemoApplication.Services.Entities.Contest;
 import com.example.mySurferApplication.DemoApplication.Services.Entities.ContestDto;
 import com.example.mySurferApplication.DemoApplication.Services.Entities.Surfer;
 import com.example.mySurferApplication.DemoApplication.Services.Entities.SurferDto;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.stereotype.Service;
-
-import javax.persistence.Table;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.failBecauseExceptionWasNotThrown;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
 
-class UnitTest {
+class MapperUnitTest {
 	private SurferMapper surferMapper = Mappers.getMapper(SurferMapper.class);
 	private ContestMapper contestMapper = Mappers.getMapper(ContestMapper.class);
 
@@ -77,6 +69,7 @@ class UnitTest {
 		surferDto.setId(1L);
 		surferDto.setCountry("Switzerland");
 		surferDto.setName("Leon");
+		surferDto.setGender("m");
 		return surferDto;
 	}
 }

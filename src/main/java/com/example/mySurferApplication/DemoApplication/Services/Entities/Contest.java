@@ -24,7 +24,13 @@ public class Contest {
         this.maxNrOfSurfer = nrOfSurfer;
         this.registeredSurfers = new HashSet<>();
     }
+    public Boolean isFull(){
+        if (this.registeredSurfers.size() >= this.maxNrOfSurfer){
+            return true;
+        }
+        return false;
 
+    }
     public Contest(){};
 
     public Set<Surfer> registerSurfer(Surfer surfer) {

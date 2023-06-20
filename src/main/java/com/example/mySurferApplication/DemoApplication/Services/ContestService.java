@@ -17,6 +17,11 @@ public class ContestService {
     @Autowired
     private ContestRepository contestRepository;
 
+    public ContestService(SurferRepository surferRepository, ContestRepository contestRepository){
+        this.contestRepository = contestRepository;
+        this.surferRepository = surferRepository;
+    }
+
     public Contest createContest(String place, Integer nrOfSurfer) {
         Contest contest = new Contest(place, nrOfSurfer);
         //entityManager.persist(contest);
@@ -30,7 +35,7 @@ public class ContestService {
 
     public Contest registerSurferAtContest(Long surferId, Long contestId) {
         Contest contest = contestRepository.findById(contestId).orElseThrow();
-        if (contest.getRegisteredSurfers().size() == contest.getMaxNrOfSurfer()) {
+        if (contest.isFull()) {
             throw new RuntimeException("Max nr of surfer exceeded");
         }
 

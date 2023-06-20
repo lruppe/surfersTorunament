@@ -42,4 +42,6 @@ public class SurferService {
                 .map(surfer -> surferMapper.surferToDto(surfer))
                 .collect(Collectors.toList());
     }
+
+
 }
