@@ -1,0 +1,4 @@
+Testing Slices in Sprint Boot
+- Web Layer: @WebMvcTest (MockMvc.perform, mock dependent bean of controller  using @MockBean)
+- JPA Components: @DataJpaTest (EntityManager, datasource)
+- Rest: @SpringBootTest
