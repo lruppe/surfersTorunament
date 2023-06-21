@@ -10,18 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
-/*
- curl -XPOST "localhost:8080/surfer" -H "Content-Type: application/json" -d "{\"name\" : \"leon\", \"country\" : \"swiss\", \"gender\" : \"f\"}"
- curl -XPOST "localhost:8080/surfer" -H "Content-Type: application/json" -d "{\"name\" : \"michele\", \"country\" : \"italian\", \"gender\" : \"m\"}"
- curl -XPOST "localhost:8080/contest?place=lucerne&nrOfSurfer=5"
- curl -XPOST "localhost:8080/1/3/register"
- curl -XGET "localhost:8080/3/contest"
- curl -XGET "localhost:8080/1/surfer"
- curl -XGET "localhost:8080/maleSurfers"
-*/
-
-
 @RestController
 public class SurfController {
 
@@ -30,10 +18,6 @@ public class SurfController {
 
     @Autowired
     private SurferService surferService;
-//
-//    public SurfController (ContestService contestService) {
-//        this.contestService = contestService;
-//    }
 
     @PostMapping (value="/contest")
     public Contest createContest(@RequestParam("place") String place, @RequestParam("nrOfSurfer") Integer nrOfSurfer) {
