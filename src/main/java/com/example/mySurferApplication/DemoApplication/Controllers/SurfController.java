@@ -59,6 +59,10 @@ public class SurfController {
         return surferService.getMaleSurfers();
     }
 
+    //just for testing
+    @GetMapping(value = "/maleSurfersSql")
+    public List<SurferDto> getMaleSurfersSql(){ return surferService.getMaleSurfersWithSQL();}
+
     @PostMapping(value = "/{surferId}/{contestId}/register")
     public Contest registerSurfer(@PathVariable(value = "surferId") Long surferId, @PathVariable(value = "contestId") Long contestId) {
         return contestService.registerSurferAtContest(surferId, contestId);

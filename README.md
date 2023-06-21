@@ -17,3 +17,4 @@ To run:
     - curl -XGET "localhost:8080/3/contest"
     - curl -XGET "localhost:8080/1/surfer"
     - curl -XGET "localhost:8080/maleSurfers"
+    - curl -XGET "localhost:8080/maleSurfersSql"

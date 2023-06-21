@@ -43,5 +43,12 @@ public class SurferService {
                 .collect(Collectors.toList());
     }
 
+    public List<SurferDto> getMaleSurfersWithSQL(){
+        return surferRepository.findMaleSurfers()
+                .stream()
+                .map(s -> surferMapper.surferToDto(s))
+                .collect(Collectors.toList());
+    }
+
 
 }
