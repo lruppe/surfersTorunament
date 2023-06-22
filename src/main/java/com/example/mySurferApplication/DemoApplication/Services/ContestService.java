@@ -24,7 +24,6 @@ public class ContestService {
 
     public Contest createContest(String place, Integer nrOfSurfer) {
         Contest contest = new Contest(place, nrOfSurfer);
-        //entityManager.persist(contest);
         contestRepository.save(contest);
         return contest;
     }
