@@ -3,9 +3,10 @@ To run:
 # Start Application container
     - Run Dockerfile
     - docker build -t surferdocker:1 .
-    - docker run -d --name surferdocker -p 8080:8080 surferdocker:1 
+    - docker run -d --name surferdocker --network surferApp -p 8080:8080 surferdocker:1 
 # Start MariaDb container
-    - docker run --detach --name mariaDbSurfer -p 3306:3306 --env MARIADB_USER=test --env MARIADB_PASSWORD=test --env MARIADB_ROOT_PASSWORD=root  mariadb:latest   
+    - docker run --detach --name mariaDbSurfer --network surferApp -p 3306:3306 --env MARIADB_USER=test --env MARIADB_PASSWORD=test --env MARIADB_ROOT_PASSWORD=root  mariadb:latest   
+    - docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' mariaDbSurfer
     - docker exec -it mariaDbSurfer bash
     - mysql -u root -p
     - GRANT ALL PRIVILEGES ON *.* TO 'test'@'%' IDENTIFIED BY 'test';
